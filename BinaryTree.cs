@@ -34,10 +34,22 @@ class BinaryTree
 		}
 	}
 
-	public void levelOrder()
+	public int getHeight()
 	{
-		Console.WriteLine("hi emaad");
-		Console.WriteLine("test");
+		if (this.left == null && this.right == null)
+		{
+			return 0;
+		}
+		else if (this.left != null && this.right == null)
+		{
+			return 1 + this.left.getHeight();
+		}
+		else if (this.left == null && this.right != null)
+		{
+			return 1 + this.right.getHeight();
+		}
+		else return Math.Max(this.left.getHeight(), this.right.getHeight());
+
 	}
 	static void Main(String[] args)
 	{
@@ -48,7 +60,7 @@ class BinaryTree
 		{
 			head.insert(Convert.ToInt32(nodeData[i]));
 		}
-		head.levelOrder();
+		Console.WriteLine(head.getHeight());
 
 	}
 }
