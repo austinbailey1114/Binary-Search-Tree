@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections;
 
 class BinaryTree
 {
@@ -51,6 +52,32 @@ class BinaryTree
 		else return Math.Max(this.left.getHeight(), this.right.getHeight());
 
 	}
+
+	public String levelOrder()
+	{
+		if (this.left == null && this.right == null)
+		{
+			return Convert.ToString(this.data);
+		}
+		Queue aQ = new Queue();
+		String s = "";
+		aQ.Enqueue(this);
+		int length = this.getHeight();
+		while (aQ.Count > 0)
+		{
+			length = aQ.Count;
+			while (length > 0)
+			{
+				BinaryTree temp = (BinaryTree)aQ.Dequeue();
+				s += temp.data + " ";
+				if (temp.left != null) aQ.Enqueue(temp.left);
+				if (temp.right != null) aQ.Enqueue(temp.right);
+				length--;
+			}
+		}
+		s = s.Substring(2);
+		return s;
+	}
 	static void Main(String[] args)
 	{
 		Console.WriteLine("Enter nodes in the following format: node1,node2,node3,node4");
@@ -61,6 +88,7 @@ class BinaryTree
 			head.insert(Convert.ToInt32(nodeData[i]));
 		}
 		Console.WriteLine(head.getHeight());
+		Console.WriteLine(head.levelOrder());
 
 	}
 }
