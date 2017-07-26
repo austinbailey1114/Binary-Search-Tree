@@ -6,6 +6,7 @@ class BinaryTree
 {
 
 	int data;
+	int key;
 	BinaryTree left;
 	BinaryTree right;
 
@@ -15,7 +16,7 @@ class BinaryTree
 		return false;
 	}
 
-	public void insert(int data)
+	public void insert(int data, int key)
 	{
 		if (data < this.data)
 		{
@@ -23,10 +24,11 @@ class BinaryTree
 			{
 				BinaryTree newTree = new BinaryTree();
 				newTree.data = data;
+				newTree.key = key;
 				this.left = newTree;
 				return;
 			}
-			else this.left.insert(data);
+			else this.left.insert(data, key);
 		}
 		else if (data > this.data)
 		{
@@ -34,10 +36,11 @@ class BinaryTree
 			{
 				BinaryTree newTree = new BinaryTree();
 				newTree.data = data;
+				newTree.key = key;
 				this.right = newTree;
 				return;
 			}
-			else this.right.insert(data);
+			else this.right.insert(data, key);
 		}
 	}
 
@@ -75,11 +78,11 @@ class BinaryTree
 		while (aQ.Count > 0)
 		{
 			newTree = (BinaryTree)aQ.Dequeue();
-			s += newTree.data + " ";
+			s += "[" + newTree.data + "," + newTree.key + "]";
 			if (newTree.left != null) aQ.Enqueue(newTree.left);
 			if (newTree.right != null) aQ.Enqueue(newTree.right);
 		}
-		s = s.Substring(2);
+		//s = s.Substring(2);
 		return s;
 	}
 	public int totalSum()
@@ -131,6 +134,23 @@ class BinaryTree
 		}
 		else return 1 + this.left.treeSize() + this.right.treeSize();
 	}
+	public BinaryTree searchData(int data) 
+	{
+		/* returns a node with the data value specified */
+		if (this.data == data)
+		{
+			return this;
+		}
+		else if (this.data < data)
+		{
+			return this.right.searchData(data);
+		}
+		else 
+		{
+			return this.left.searchData(data);
+		}
+	}
+
 
 	static void Main(String[] args)
 	{
@@ -139,7 +159,7 @@ class BinaryTree
 		BinaryTree head = new BinaryTree();
 		for (int i = 0; i < nodeData.Length; i++)
 		{
-			head.insert(Convert.ToInt32(nodeData[i]));
+			head.insert(Convert.ToInt32(nodeData[i]), i);
 		}
 		Console.WriteLine();
 		Console.WriteLine("Tree size: " + head.treeSize());
@@ -147,7 +167,7 @@ class BinaryTree
 		Console.WriteLine("Level Order: " + head.levelOrder());
 		Console.WriteLine("Total Sum: " + head.totalSum());
 		Console.WriteLine("Leaf Count: " + head.leafCount());
-
+		Console.WriteLine("Key from searchData(): " + head.searchData(5).key);
 
 	}
 }
