@@ -9,6 +9,12 @@ class BinaryTree
 	BinaryTree left;
 	BinaryTree right;
 
+	public bool isLeaf()
+	{
+		if (this.left == null && this.right == null) return true;
+		return false;
+	}
+
 	public void insert(int data)
 	{
 		if (data < this.data)
@@ -37,7 +43,8 @@ class BinaryTree
 
 	public int getHeight()
 	{
-		if (this.left == null && this.right == null)
+		/* returns the maximum height of the binary search tree */
+		if (this.isLeaf())
 		{
 			return 0;
 		}
@@ -55,28 +62,42 @@ class BinaryTree
 
 	public String levelOrder()
 	{
-		if (this.left == null && this.right == null)
+		/*
+		 * Returns a string with nodes printed in level order*/
+		if (this.isLeaf())
 		{
 			return Convert.ToString(this.data);
 		}
 		Queue aQ = new Queue();
 		String s = "";
 		aQ.Enqueue(this);
-		int length = this.getHeight();
+		BinaryTree newTree = new BinaryTree();
 		while (aQ.Count > 0)
 		{
-			length = aQ.Count;
-			while (length > 0)
-			{
-				BinaryTree temp = (BinaryTree)aQ.Dequeue();
-				s += temp.data + " ";
-				if (temp.left != null) aQ.Enqueue(temp.left);
-				if (temp.right != null) aQ.Enqueue(temp.right);
-				length--;
-			}
+			newTree = (BinaryTree)aQ.Dequeue();
+			s += newTree.data + " ";
+			if (newTree.left != null) aQ.Enqueue(newTree.left);
+			if (newTree.right != null) aQ.Enqueue(newTree.right);
 		}
 		s = s.Substring(2);
 		return s;
+	}
+	public int totalSum()
+	{
+		/* returns the sum of all node data in the tree */
+		if (this.isLeaf())
+		{
+			return this.data;
+		}
+		else if (this.left != null && this.right == null)
+		{
+			return this.data + this.left.totalSum();
+		}
+		else if (this.left == null && this.right != null)
+		{
+			return this.data + this.right.totalSum();
+		}
+		else return this.data + this.left.totalSum() + this.right.totalSum();
 	}
 	static void Main(String[] args)
 	{
@@ -87,8 +108,9 @@ class BinaryTree
 		{
 			head.insert(Convert.ToInt32(nodeData[i]));
 		}
-		Console.WriteLine(head.getHeight());
-		Console.WriteLine(head.levelOrder());
+		Console.WriteLine("Height: " + head.getHeight());
+		Console.WriteLine("Level Order: " + head.levelOrder());
+		Console.WriteLine("Total Sum: " + head.totalSum());
 
 	}
 }
