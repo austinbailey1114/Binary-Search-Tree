@@ -99,6 +99,39 @@ class BinaryTree
 		}
 		else return this.data + this.left.totalSum() + this.right.totalSum();
 	}
+	public int leafCount()
+	{
+		if (isLeaf())
+		{
+			return 1;
+		}
+		else if (this.left != null && this.right == null)
+		{
+			return 0 + this.left.leafCount();
+		}
+		else if (this.left == null && this.right != null)
+		{
+			return 0 + this.right.leafCount();
+		}
+		else return 0 + this.left.leafCount() + this.right.leafCount();
+	}
+	public int treeSize()
+	{
+		if (isLeaf())
+		{
+			return 1;
+		}
+		else if (this.left != null && this.right == null)
+		{
+			return 1 + this.left.treeSize();
+		}
+		else if (this.left == null && this.right != null)
+		{
+			return 1 + this.right.treeSize();
+		}
+		else return 1 + this.left.treeSize() + this.right.treeSize();
+	}
+
 	static void Main(String[] args)
 	{
 		Console.WriteLine("Enter nodes in the following format: node1,node2,node3,node4");
@@ -108,9 +141,13 @@ class BinaryTree
 		{
 			head.insert(Convert.ToInt32(nodeData[i]));
 		}
+		Console.WriteLine();
+		Console.WriteLine("Tree size: " + head.treeSize());
 		Console.WriteLine("Height: " + head.getHeight());
 		Console.WriteLine("Level Order: " + head.levelOrder());
 		Console.WriteLine("Total Sum: " + head.totalSum());
+		Console.WriteLine("Leaf Count: " + head.leafCount());
+
 
 	}
 }
