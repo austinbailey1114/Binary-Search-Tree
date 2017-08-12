@@ -10,3 +10,25 @@ class which contains functions insert(), getHeight(), findMin(), findMax() level
  found using the funcitons of the BinarySearchTree class.
  ### In Development ###
  In the future, I plan to add more types of Binary Tree's that can be used in the main BinaryTree class.
+### Example Output ### 
+Enter node data in the following format: node1,node2,node3,node4,etc.
+ 
+The tree will be built in the order that the node data is entered.
+
+Enter here: 5,8,6,7,2,4,3
+
+Tree size: 7
+
+Height: 3
+
+Level Order: [5,0][2,4][8,1][4,5][6,2][3,6][7,3]
+
+Total Sum: 35
+
+Leaf Count: 2
+
+Key from searchData(): 0
+
+Min, Max: 2, 8
+
+Data Sorted: 2 3 4 5 6 7 8 
