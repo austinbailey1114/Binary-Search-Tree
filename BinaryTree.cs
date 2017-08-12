@@ -6,7 +6,9 @@ class BinaryTree {
 
 	
 	static void Main(String[] args) {
-		Console.WriteLine("Enter nodes in the following format: node1,node2,node3,node4");
+		Console.WriteLine("Enter node data in the following format: node1,node2,node3,node4,etc.");
+        Console.WriteLine("The tree will be built in the order that the node data is entered.");
+        Console.Write("Enter here: ");
 		string[] nodeData = Console.ReadLine().Split(',');
 		BinarySearchTree head = new BinarySearchTree();
 		head.data = Convert.ToInt32(nodeData[0]);
