@@ -5,7 +5,7 @@ BinaryTree which can be used to instantiate different types of binary trees. Rig
 class which contains functions insert(), getHeight(), findMin(), findMax() levelOrder(), totalSum(), leafCount(), treeSize(),
  searchData(), and sort(). 
  ### How to use it ###
- After using `git clone`, run the BinaryTree class and follow the console instructions. The console will build a binary tree by 
+ After using cloning the repository, run the BinaryTree class and follow the console instructions. The console will build a binary tree by 
  inserting the nodes in the order in which the user enters them. Then the program will print information about the tree
  found using the funcitons of the BinarySearchTree class.
  ### In Development ###
